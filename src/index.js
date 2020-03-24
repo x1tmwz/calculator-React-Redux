@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CaculatorApp from './components/CaculatorApp'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CaculatorApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
