@@ -7,21 +7,24 @@ const CaculatorOperatorKeys = () => {
     const { state,dispatch } = useContext(CaculatorContext);
     const clickHandler = (e) => {
         const operator = e.target.textContent;
-        if(operator == "="){
+        if(operator === "="){
             return dispatch(caculatWithTwoNumbers(operator));
         }
-        if(state.mathOperator == operator){
+        if(state.numberOne && state.numberTwo && state.mathOperator){
+            return dispatch(caculatWithTwoNumbers(operator));
+        }
+        if(state.mathOperator === operator){
            return dispatch(caculatWithOneNumber(operator));
         }
         dispatch(setMathOperator(operator));
     }
     return (
-        <div>
-            <button onClick={clickHandler}>÷</button>
-            <button onClick={clickHandler}>X</button>
-            <button onClick={clickHandler}>-</button>
-            <button onClick={clickHandler}>+</button>
-            <button onClick={clickHandler}>=</button>
+        <div className="operator-keys">
+            <button onClick={clickHandler} className="calculator-key key-divide">÷</button>
+            <button onClick={clickHandler} className="calculator-key key-multiply">X</button>
+            <button onClick={clickHandler} className="calculator-key key-subtract">-</button>
+            <button onClick={clickHandler} className="calculator-key key-add">+</button>
+            <button onClick={clickHandler} className="calculator-key key-equals">=</button>
         </div>
     );
 

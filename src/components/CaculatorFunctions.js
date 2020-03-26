@@ -1,20 +1,45 @@
 import React, { useContext } from 'react';
 import CaculatorContext from '../context/CaculatorContext';
-import { setMathOperator } from '../actions/caculator';
+import { clearAll, clear, setNumberOne, setNumberTwo } from '../actions/caculator';
 
 
 const CaculatorFunctions = () => {
     const { state, dispatch } = useContext(CaculatorContext);
-    const clickHandler = (e) => {
-        const operator = e.target.textContent;
-        dispatch(setMathOperator(operator));
+    const clickClearHandler = (e) => {
+        if (state.numberOne && state.mathOperator){
+            if(state.clearAll)dispatch(clearAll());
+            return dispatch(clear());
+        }
+        dispatch(clearAll());
+    }
+
+    const clickOppsiteHandler = (e) => {
+        const isThereOpeator = state.mathOperator;
+        if (!isThereOpeator) {
+            const oppsiteNumberOne = state.numberOne * -1;
+            dispatch(setNumberOne(oppsiteNumberOne));
+        }
+        else {
+            const oppsiteNumberTwo = state.numberTwo * -1;
+            dispatch(setNumberTwo(oppsiteNumberTwo))
+        }
+    }
+
+    const clickPresentHandler = (e) => {
+        const isThereOpeator = state.mathOperator;
+        if (!isThereOpeator) {
+            dispatch(setNumberOne(state.numberOne / 100));
+        }
+        else {
+            dispatch(setNumberTwo(state.numberTwo / 100))
+        }
+
     }
     return (
-        <div>
-            <button onClick={clickHandler}>AC</button>
-            <button onClick={clickHandler}>C</button>
-            <button onClick={clickHandler}>±</button>
-            <button onClick={clickHandler}>%</button>
+        <div className="function-keys">
+            <button onClick={clickClearHandler} className="calculator-key key-clear">{state.numberOne && !state.clearAll ? 'C' : 'AC'}</button>
+            <button onClick={clickOppsiteHandler} className="calculator-key key-sign">±</button>
+            <button onClick={clickPresentHandler} className="calculator-key key-percent">%</button>
         </div>
 
 

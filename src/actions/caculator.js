@@ -11,16 +11,25 @@ const setMathOperator = (mathOperator) => ({
     mathOperator
 })
 const caculatWithOneNumber =(operator)=>({
-    type:'CACULATE_ONE_NUMBER',
+    type:'CACULATE_WITH_ONE_NUMBER',
     mathOperator:operator
 })
-const caculatWithTwoNumbers =()=>({
-    type:'CACULATE_TWO_NUMBERS'
+const caculatWithTwoNumbers =(operator)=>({
+    type:'CACULATE_WITH_TWO_NUMBERS',
+    mathOperator:operator
+})
+const clearAll = ()=>({
+    type:'CLEARALL'
+})
+const clear = ()=>({
+    type:'CLEAR'
 })
 export {
     setNumberOne,
     setNumberTwo,
     setMathOperator,
     caculatWithOneNumber,
-    caculatWithTwoNumbers
+    caculatWithTwoNumbers,
+    clearAll,
+    clear
 };

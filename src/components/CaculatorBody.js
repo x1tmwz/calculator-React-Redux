@@ -1,14 +1,17 @@
 import React from 'react';
 import CaculatorDigitKeys from './CaculatorDigitKeys';
 import CaculatorOperatorKeys from './CaculatorOperatorKeys';
-
+import CaculatorFunctions from './CaculatorFunctions';
 
 const CaculatorBody = () => {
-  
+
     return (
-        <div>
-           <CaculatorDigitKeys />
-           <CaculatorOperatorKeys />
+        <div className="calculator-keypad">
+            <div className="input-keys">
+                <CaculatorFunctions />
+                <CaculatorDigitKeys />
+            </div>
+            <CaculatorOperatorKeys />
         </div>
     );
 

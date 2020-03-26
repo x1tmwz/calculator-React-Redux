@@ -1,23 +1,43 @@
-
 const caculatorResult = require('../selectors/caculatorResult');
 
-const caculatorReducer = (state, action) => {
+const defaultState = {
+    numberOne: 0,
+    mathOperator: '',
+    numberTwo: 0,
+    clearAll:false
+}
+const caculatorReducer = (state = defaultState, action) => {
     switch (action.type) {
         case 'SET_OPERATOR':
             return { ...state, mathOperator: action.mathOperator };
         case 'SET_NUMBER_ONE':
-            return { ...state, numberOne: action.number }
+            return { ...state, numberOne: action.number,clearAll:false }
         case 'SET_NUMBER_TWO':
-            return { ...state, numberTwo: action.number }
-        case "CACULATE_ONE_NUMBER":
-            return caculatorResult(state.numberOne, state.numberOne, action.mathOperator);
-        case 'CACULATE_TWO_NUMBERS':
-            return {...caculatorResult(state.numberOne, state.numberTwo, state.mathOperator),mathOperator:""};
+            return { ...state, numberTwo: action.number,clearAll:false }
+        case "CACULATE_WITH_ONE_NUMBER":
+            return {
+                ...state,
+                ...caculatorResult(state.numberOne, state.numberOne, action.mathOperator)};
+        case 'CACULATE_WITH_TWO_NUMBERS':
+            return {
+                ...state,
+                 ...caculatorResult(state.numberOne, state.numberTwo, state.mathOperator),
+                  mathOperator: action.mathOperator=== '='? '':action.mathOperator};
+        case 'CLEARALL': {
+            return defaultState;
+        }
+        case 'CLEAR':{
+            return{
+                ...state,
+                numberTwo:0,
+                clearAll:true
+            }
+        }
         default:
             return state;
     }
 }
-export { caculatorReducer as default }
+export { caculatorReducer as default, defaultState }
 
 
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import CaculatorApp from './components/CaculatorApp'
+import CaculatorApp from './components/CaculatorApp';
+import 'normalize.css/normalize.css'
+import './styles/styles.css';
 
 ReactDOM.render(
   <React.StrictMode>
