@@ -21,6 +21,10 @@ const caculatWithTwoNumbers =(operator)=>({
 const clearAll = ()=>({
     type:'CLEARALL'
 })
+const setClearAll = (bool)=>({
+    type:"SET_CLEAR_ALL",
+    clearAll:bool
+})
 const clear = ()=>({
     type:'CLEAR'
 })
@@ -31,5 +35,7 @@ export {
     caculatWithOneNumber,
     caculatWithTwoNumbers,
     clearAll,
-    clear
+    clear,
+    setClearAll
+    
 };

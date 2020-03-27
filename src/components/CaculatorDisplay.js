@@ -1,39 +1,40 @@
-import React, { useContext, useRef } from 'react';
-import CaculatorContext from '../context/CaculatorContext';
+import React, { useEffect,useState } from 'react';
+import { connect } from 'react-redux';
 
-const CaculatorDisplay = () => {
-    const { state } = useContext(CaculatorContext);
-    const display = useRef(null);
-    const text = useRef(null);
-    const format = (data)=>{
-        if(data.length >= 4){
-            return new Intl.NumberFormat('en-IN',{style:"decimal", maximumFractionDigits: 6 }).format(data);
+const CaculatorDisplay = ({ numberOne, numberTwo}) => {
+    const [scale, setScale] = useState(1);
+    const format = (data) => {
+        if (data.length >= 4) {
+            return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 6 }).format(data);
         }
         return data;
-        
     }
-    const scale = () => {
-        if (!text.current) return 1;
-        if (!display.current) return 1;
-        const textSize = text.current.offsetWidth - 50;
-        const displaySize = display.current.offsetWidth -50;
-        if (textSize >= displaySize) {
-           // const charterSize = textSize / (state.numberOne.length+3);
-            return displaySize / textSize
+    useEffect(() => {
+        const view = document.getElementsByClassName("calculator-display")[0];
+        const text = view.lastChild;
+        const viewSize = view.getBoundingClientRect()
+        const textSize = text.getBoundingClientRect()
+        if (textSize.left <= viewSize.left) {
+           return setScale(viewSize.width / (textSize.width/scale))
         }
-        return 1;
-    };
-
-
-    console.log(state);
+        setScale(1);
+    },[numberOne,numberTwo,scale])
     return (
-        <div className="calculator-display" ref={display} >
-            <div className="auto-scaling-text" style={{ transform: `scale(${scale()})` }} ref={text} >
-                {state.numberTwo ?  format(state.numberTwo) :format(state.numberOne)}
+        <div className="calculator-display"  >
+            <div className="auto-scaling-text" style={{ transform: `scale(${scale})` }}  >
+                {numberTwo ? format(numberTwo) : format(numberOne)}
             </div>
-
         </div>
     );
-
 }
-export { CaculatorDisplay as default };
+const mapStateToProps = (state) => ({
+    numberOne: state.numberOne,
+    numberTwo: state.numberTwo
+})
+export default connect(mapStateToProps)(CaculatorDisplay);
+
+
+
+
+
+

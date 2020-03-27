@@ -1,49 +1,59 @@
-import React, { useContext } from 'react';
-import CaculatorContext from '../context/CaculatorContext';
-import { clearAll, clear, setNumberOne, setNumberTwo } from '../actions/caculator';
+import React from 'react';
+import { connect } from 'react-redux'
+import { clearAll, clear, setNumberOne, setNumberTwo,setClearAll } from '../actions/caculator';
 
 
-const CaculatorFunctions = () => {
-    const { state, dispatch } = useContext(CaculatorContext);
+const CaculatorFunctions = (props) => {
     const clickClearHandler = (e) => {
-        if (state.numberOne && state.mathOperator){
-            if(state.clearAll)dispatch(clearAll());
-            return dispatch(clear());
+        if (props.numberOne && props.mathOperator){
+            if(props.clearAll)props.startClearAll();
+            props.startSetClearAll(true);
+            return props.startClean;
         }
-        dispatch(clearAll());
+        props.startClearAll();
     }
 
     const clickOppsiteHandler = (e) => {
-        const isThereOpeator = state.mathOperator;
+        const isThereOpeator = props.mathOperator;
         if (!isThereOpeator) {
-            const oppsiteNumberOne = state.numberOne * -1;
-            dispatch(setNumberOne(oppsiteNumberOne));
+            const oppsiteNumberOne = props.numberOne * -1;
+            props.startSetNumberOne(oppsiteNumberOne);
         }
         else {
-            const oppsiteNumberTwo = state.numberTwo * -1;
-            dispatch(setNumberTwo(oppsiteNumberTwo))
+            const oppsiteNumberTwo = props.numberTwo * -1;
+            props.startSetNumberTwo(oppsiteNumberTwo)
         }
     }
 
     const clickPresentHandler = (e) => {
-        const isThereOpeator = state.mathOperator;
+        const isThereOpeator = props.mathOperator;
         if (!isThereOpeator) {
-            dispatch(setNumberOne(state.numberOne / 100));
+            props.startSetNumberOne(props.numberOne / 100);
         }
         else {
-            dispatch(setNumberTwo(state.numberTwo / 100))
+             props.startSetNumberTwo(props.numberTwo / 100);
         }
 
     }
+
     return (
         <div className="function-keys">
-            <button onClick={clickClearHandler} className="calculator-key key-clear">{state.numberOne && !state.clearAll ? 'C' : 'AC'}</button>
+            <button onClick={clickClearHandler} className="calculator-key key-clear">{props.numberOne && !props.clearAll ? 'C' : 'AC'}</button>
             <button onClick={clickOppsiteHandler} className="calculator-key key-sign">±</button>
             <button onClick={clickPresentHandler} className="calculator-key key-percent">%</button>
         </div>
-
-
     );
 
 }
-export { CaculatorFunctions as default };
+const mapStateToProps =(state)=>({
+    ...state
+})
+const mapDispatchToProps =(dispatch)=>({
+    startSetNumberOne:(number)=>dispatch(setNumberOne(number)),
+    startSetNumberTwo:(number)=>dispatch(setNumberTwo(number)),
+    startClear:()=>dispatch(clear()),
+    startSetClearAll:(bool)=>dispatch(setClearAll(bool)),
+    startClearAll:()=>dispatch(clearAll())
+
+})
+export default connect(mapStateToProps,mapDispatchToProps)(CaculatorFunctions);

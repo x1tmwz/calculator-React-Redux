@@ -4,7 +4,6 @@ import CaculatorOperatorKeys from './CaculatorOperatorKeys';
 import CaculatorFunctions from './CaculatorFunctions';
 
 const CaculatorBody = () => {
-
     return (
         <div className="calculator-keypad">
             <div className="input-keys">
@@ -14,6 +13,5 @@ const CaculatorBody = () => {
             <CaculatorOperatorKeys />
         </div>
     );
-
 }
-export { CaculatorBody as default };
+export  default CaculatorBody;

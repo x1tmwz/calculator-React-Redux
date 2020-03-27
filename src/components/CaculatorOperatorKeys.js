@@ -1,22 +1,23 @@
-import React, { useContext } from 'react';
-import CaculatorContext from '../context/CaculatorContext';
+import React from 'react';
+import { connect } from 'react-redux'
 import { setMathOperator , caculatWithOneNumber,caculatWithTwoNumbers} from '../actions/caculator';
 
 
-const CaculatorOperatorKeys = () => {
-    const { state,dispatch } = useContext(CaculatorContext);
+
+const CaculatorOperatorKeys = (props) => {
+  
     const clickHandler = (e) => {
         const operator = e.target.textContent;
         if(operator === "="){
-            return dispatch(caculatWithTwoNumbers(operator));
+            return props.startCaculatWithTwoNumbers(operator);
         }
-        if(state.numberOne && state.numberTwo && state.mathOperator){
-            return dispatch(caculatWithTwoNumbers(operator));
+        if(props.numberOne && props.numberTwo && props.mathOperator){
+            return props.startCaculatWithTwoNumbers(operator);
         }
-        if(state.mathOperator === operator){
-           return dispatch(caculatWithOneNumber(operator));
+        if(props.mathOperator === operator){
+           return props.startCaculatWithOneNumber(operator);
         }
-        dispatch(setMathOperator(operator));
+        props.startSetMathOperator(operator);
     }
     return (
         <div className="operator-keys">
@@ -29,4 +30,12 @@ const CaculatorOperatorKeys = () => {
     );
 
 }
-export { CaculatorOperatorKeys as default };
+const mapStateToProps =(state)=>({
+    ...state
+})
+const mapDispatchToProps =(dispatch)=>({
+    startSetMathOperator:(operator)=>dispatch(setMathOperator(operator)),
+    startCaculatWithOneNumber:(operator)=>dispatch(caculatWithOneNumber(operator)),
+    startCaculatWithTwoNumbers:(operator)=>dispatch(caculatWithTwoNumbers(operator))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(CaculatorOperatorKeys);

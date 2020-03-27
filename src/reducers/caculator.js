@@ -1,3 +1,5 @@
+import { clearAll } from '../actions/caculator';
+
 const caculatorResult = require('../selectors/caculatorResult');
 
 const defaultState = {
@@ -23,16 +25,19 @@ const caculatorReducer = (state = defaultState, action) => {
                 ...state,
                  ...caculatorResult(state.numberOne, state.numberTwo, state.mathOperator),
                   mathOperator: action.mathOperator=== '='? '':action.mathOperator};
-        case 'CLEARALL': {
+        case 'CLEARALL': 
             return defaultState;
-        }
-        case 'CLEAR':{
+        case "SET_CLEAR_ALL":
+            return{
+                ...state,
+                clearAll:action.clearAll
+            }
+        case 'CLEAR':
             return{
                 ...state,
                 numberTwo:0,
                 clearAll:true
             }
-        }
         default:
             return state;
     }

@@ -1,16 +1,14 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import CaculatorDisplay from './CaculatorDisplay';
 import CaculatorBody from './CaculatorBody';
-import CaculatorContext from '../context/CaculatorContext';
-import caculatorReducer, { defaultState } from '../reducers/caculator';
+import { Provider } from 'react-redux'
+import configStore from '../store/configStore';
 
+const store = configStore();
 
-
-const CaculatorApp = (props) => {
-    const [state, dispatch] = useReducer(caculatorReducer, props.defaultState);
-
+const CaculatorApp = () => {
     return (
-        <CaculatorContext.Provider value={{ state, dispatch }}>
+        <Provider store={store}>
             <div id="wrapper">
                 <div id="app">
                     <div className="calculator">
@@ -20,12 +18,7 @@ const CaculatorApp = (props) => {
 
                 </div>
             </div>
-        </CaculatorContext.Provider>
+        </Provider>
     );
 }
-
-CaculatorApp.defaultProps = {
-    defaultState
-}
-
 export { CaculatorApp as default };

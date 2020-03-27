@@ -4,33 +4,33 @@ const caculatorResult = (numberOne, numberTwo, operator) => {
     switch (operator) {
         case '+':
             return {
-                numberOne: numberOne + numberTwo,
+                numberOne: (numberOne + numberTwo).toString(),
                 numberTwo: 0,
                 mathOperator: operator
             }
         case '-':
             return {
-                numberOne: numberOne - numberTwo,
+                numberOne: (numberOne - numberTwo).toString(),
                 numberTwo: 0,
                 mathOperator: operator
             }
         case 'X':
             return {
-                numberOne: numberOne * numberTwo,
+                numberOne: (numberOne * numberTwo).toString(),
                 numberTwo: 0,
                 mathOperator: operator
             }
         case '÷':
             return {
-                numberOne: numberOne / numberTwo,
+                numberOne: (numberOne / numberTwo).toString(),
                 numberTwo: 0,
                 mathOperator: operator
             }
         default:
             console.log('default')
             return {
-                numberOne: numberOne,
-                numberTwo: numberTwo,
+                numberOne: (numberOne).toString(),
+                numberTwo: (numberTwo).toString(),
                 mathOperator: operator
 
             }
