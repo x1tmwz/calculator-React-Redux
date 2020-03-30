@@ -36,14 +36,13 @@ button {
     width: 100%;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+ 
 }
 
 
 .calculator {
     width: 30%;
     height: 80%;
-    border: 1px solid black;
     background: black;
 
    
