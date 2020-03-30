@@ -9,15 +9,18 @@ const store = configStore();
 const CaculatorApp = () => {
     return (
         <Provider store={store}>
-            <div id="wrapper">
-                <div id="app">
-                    <div className="calculator">
-                        <CaculatorDisplay />
-                        <CaculatorBody />
-                    </div>
-
+            <div className="wrapper">
+                <div className="calculator">
+                    <CaculatorDisplay />
+                    <CaculatorBody />
                 </div>
+
             </div>
+
+
+
+
+
         </Provider>
     );
 }

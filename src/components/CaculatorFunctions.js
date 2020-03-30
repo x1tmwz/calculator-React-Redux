@@ -27,7 +27,7 @@ const CaculatorFunctions = (props) => {
 
     const clickPresentHandler = (e) => {
         const isThereOpeator = props.mathOperator;
-        if (!isThereOpeator) {
+        if (!isThereOpeator || !props.numberTwo) {
             props.startSetNumberOne(props.numberOne / 100);
         }
         else {
@@ -38,9 +38,9 @@ const CaculatorFunctions = (props) => {
 
     return (
         <div className="function-keys">
-            <button onClick={clickClearHandler} className="calculator-key key-clear">{props.numberOne && !props.clearAll ? 'C' : 'AC'}</button>
-            <button onClick={clickOppsiteHandler} className="calculator-key key-sign">±</button>
-            <button onClick={clickPresentHandler} className="calculator-key key-percent">%</button>
+            <button onClick={clickClearHandler}>{props.numberOne && !props.clearAll ? 'C' : 'AC'}</button>
+            <button onClick={clickOppsiteHandler}>±</button>
+            <button onClick={clickPresentHandler}>%</button>
         </div>
     );
 

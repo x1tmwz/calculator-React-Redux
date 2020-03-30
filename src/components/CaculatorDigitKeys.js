@@ -13,35 +13,43 @@ class CaculatorDigitKeys extends React.Component {
         const newNumber = e.target.textContent;
         const isThereOpeator = this.props.mathOperator;
         if (!isThereOpeator) {
-            this.setNumber(newNumber, { number: this.props.numberOne, set:this.props.startSetNumberOne });
+            this.setNumber(newNumber, { number: this.props.numberOne, set: this.props.startSetNumberOne });
         } else {
-           this.setNumber(newNumber, { number: this.props.numberTwo, set:this.props.startSetNumberTwo });
+            this.setNumber(newNumber, { number: this.props.numberTwo, set: this.props.startSetNumberTwo });
         }
     }
-    render(){
+    render() {
         return (
             <div className="digit-keys">
-                <button onClick={this.clickHandler} className="calculator-key key-0">0</button>
-                <button onClick={this.clickHandler} className="calculator-key key-dot">.</button>
-                <button onClick={this.clickHandler} className="calculator-key key-1">1</button>
-                <button onClick={this.clickHandler} className="calculator-key key-2">2</button>
-                <button onClick={this.clickHandler} className="calculator-key key-3">3</button>
-                <button onClick={this.clickHandler} className="calculator-key key-4">4</button>
-                <button onClick={this.clickHandler} className="calculator-key key-5">5</button>
-                <button onClick={this.clickHandler} className="calculator-key key-6">6</button>
-                <button onClick={this.clickHandler} className="calculator-key key-7">7</button>
-                <button onClick={this.clickHandler} className="calculator-key key-8">8</button>
-                <button onClick={this.clickHandler} className="calculator-key key-9">9</button>
+                <div className="buttons_row">
+                    <button onClick={this.clickHandler} className="calculator-key key-1">1</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-2">2</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-3">3</button>
+                </div>
+                <div className="buttons_row">
+                    <button onClick={this.clickHandler} className="calculator-key key-4">4</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-5">5</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-6">6</button>
+                </div>
+                <div className="buttons_row">
+                    <button onClick={this.clickHandler} className="calculator-key key-7">7</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-8">8</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-9">9</button>
+                </div>
+                <div className="buttons_row">
+                    <button onClick={this.clickHandler} className="calculator-key key-0">0</button>
+                    <button onClick={this.clickHandler} className="calculator-key key-dot">.</button>
+                </div>
             </div>
         );
 
     }
 }
-const mapStateToProps =(state)=>{
-    return {...state}
+const mapStateToProps = (state) => {
+    return { ...state }
 }
-const mapDispatchToProps =(dispatch)=>({
-    startSetNumberOne:(number)=>dispatch(setNumberOne(number)),
-    startSetNumberTwo:(number)=>dispatch(setNumberTwo(number))
+const mapDispatchToProps = (dispatch) => ({
+    startSetNumberOne: (number) => dispatch(setNumberOne(number)),
+    startSetNumberTwo: (number) => dispatch(setNumberTwo(number))
 })
-export default connect(mapStateToProps,mapDispatchToProps)(CaculatorDigitKeys);
+export default connect(mapStateToProps, mapDispatchToProps)(CaculatorDigitKeys);

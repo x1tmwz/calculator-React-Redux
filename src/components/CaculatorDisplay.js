@@ -14,18 +14,19 @@ const CaculatorDisplay = ({ numberOne, numberTwo}) => {
         const text = view.lastChild;
         const viewSize = view.getBoundingClientRect()
         const textSize = text.getBoundingClientRect()
-        if (textSize.left <= viewSize.left) {
-           return setScale(viewSize.width / (textSize.width/scale))
+        if ((textSize.width/scale) >= viewSize.width) {
+            return setScale(viewSize.width / (textSize.width / scale))
         }
         setScale(1);
-    },[numberOne,numberTwo,scale])
+    },[numberOne,numberTwo])
     return (
-        <div className="calculator-display"  >
+        <div className="calculator-display" >
             <div className="auto-scaling-text" style={{ transform: `scale(${scale})` }}  >
-                {numberTwo ? format(numberTwo) : format(numberOne)}
+                {numberTwo ? format(numberTwo.toString()) : format(numberOne.toString())}
             </div>
         </div>
     );
+
 }
 const mapStateToProps = (state) => ({
     numberOne: state.numberOne,

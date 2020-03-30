@@ -6,11 +6,12 @@ import CaculatorFunctions from './CaculatorFunctions';
 const CaculatorBody = () => {
     return (
         <div className="calculator-keypad">
+            <CaculatorOperatorKeys />
             <div className="input-keys">
                 <CaculatorFunctions />
                 <CaculatorDigitKeys />
             </div>
-            <CaculatorOperatorKeys />
+            
         </div>
     );
 }
